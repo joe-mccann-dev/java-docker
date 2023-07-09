@@ -7,6 +7,9 @@ COPY mvnw pom.xml ./
 RUN ./mvnw dependency:resolve
 COPY src ./src
 
+FROM base as test
+RUN ["./mvnw", "test"]
+
 FROM base as development
 # exposing 8000 in development enables attaching to remote jvm debugger
 EXPOSE 8000
